@@ -1,4 +1,5 @@
 # JustDeco
+Jest Deco is an event decoration service provider, it offers various types of services like Wedding Decoration, Corporate Event Decoration, Birthday Decoration, Theme-based Decoration etc.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.3.
 
