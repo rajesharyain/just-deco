@@ -1,0 +1,43 @@
+#services img {
+    object-fit: cover;
+    height: 267px;
+   /*  width: 356px; */
+}
+
+.planning-section .card{
+    background-color: #03C988 !important;
+   padding: 0rem 4rem; 
+}
+
+.planning-section .card .card-title
+{
+    line-height: 1.2em;
+    text-align: center;
+    font-size: 72px;
+    font-weight: bold;
+    color: #FFC;
+   
+}
+.planning-section .card .card-title span
+{
+    letter-spacing: 0.02em;
+    padding: 2rem 4rem;
+    display: block;
+}
+
+.btn-contact{
+    background: transparent;
+    border: #FFF76A solid 1px;
+    padding: 1rem 4rem;
+    cursor: pointer;
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    border-radius: none;
+}
+
+.btn-contact:hover,  .btn-contact:focus{
+    background: #FFF76A;
+    color: #000;
+
+}
