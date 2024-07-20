@@ -3,6 +3,8 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { User } from './user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,7 @@ export class AuthService {
   async loginWithGitHub() {
     try {
       await this.afAuth.signInWithPopup(new firebase.auth.GithubAuthProvider());
-      this.router.navigate(['/']);
+      this.router.navigate(['/home']);
     } catch (error) {
       console.log('Error during login with GitHub:', error);
     }
@@ -23,13 +25,13 @@ export class AuthService {
   async logout() {
     try {
       await this.afAuth.signOut();
-      this.router.navigate(['/']);
+      this.router.navigate(['/home']);
     } catch (error) {
       console.log('Error during logout:', error);
     }
   }
 
-  getUser() {
-    return this.afAuth.authState;
+  getUser(): Observable<User | null> {
+    return this.afAuth.authState as Observable<User | null>;
   }
 }

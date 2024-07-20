@@ -15,7 +15,21 @@ import { FooterComponent } from './common/footer/footer.component';
 import { PortfolioModalComponent } from './common/portfolio-modal/portfolio-modal.component';
 import { HeaderComponent } from './common/header/header.component';
 import { HomeComponent } from './pages/home/home.component';
+import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
 
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+
+/* import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+ */
+
+
+import { environment } from './environments/environment';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { AuthService } from './auth.service';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,13 +44,24 @@ import { HomeComponent } from './pages/home/home.component';
     FooterComponent,
     PortfolioModalComponent,
     HeaderComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent,
+    LogoutComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AppRoutingModule,
+  /*   MatMenuModule,
+    MatIconModule
+   */
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync(),
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
