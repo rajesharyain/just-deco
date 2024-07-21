@@ -31,7 +31,11 @@
             </div>
         </div>
     </div>
-   
+     <!-- Alert message -->
+    <div *ngIf="alertMessage" class="alert mt-4 alert-pos" [ngClass]="'alert-' + alertType" role="alert">
+        {{ alertMessage }}
+    </div>
+
     <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
     <div class="text-center">
     <button class="btn btn-primary btn-xl text-uppercase" type="submit" [disabled]="contactForm.invalid">Send Message</button>
