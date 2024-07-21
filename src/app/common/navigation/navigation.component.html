@@ -13,7 +13,54 @@
                 <li class="nav-item"><a class="nav-link" routerLink="/portfolio"  routerLinkActive="active">Portfolio</a></li>
                 <li class="nav-item"><a class="nav-link" routerLink="/about"  routerLinkActive="active">About</a></li>
                 <li class="nav-item"><a class="nav-link" routerLink="/contact"  routerLinkActive="active">Contact</a></li>
+                
+
+                  <li class="nav-item dropdown" *ngIf=" user$ | async as user ; else login">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      
+                        <ng-container *ngIf="user.photoURL; else initialsTemplate">
+                            <img
+                                class="rounded-circle"
+                                height="30"
+                                alt=""
+                                loading="lazy"
+                                [src]="user.photoURL" alt="Profile Image"/>
+                          </ng-container>
+                          <ng-template #initialsTemplate>
+                            <span class="initials">{{ initials }}</span>
+                          </ng-template>
+
+
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li><app-logout></app-logout></li>
+                     <!--  <li><a class="dropdown-item" href="#">Another action</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+                    </ul>
+                  </li>
+               
+               <!--  <li class="nav-item dropdown">
+                    <app-user-profile></app-user-profile>
+                </li> -->
             </ul>
         </div>
+
+        <ng-template #login>
+            <li class="nav-item">
+                <app-login></app-login>
+            </li>
+          </ng-template>
+
+       <!--  <div *ngIf="user$ | async as user; else login">
+            <h1>Welcome {{ user.displayName }}</h1>
+            <app-logout></app-logout>
+          </div>
+          <ng-template #login>
+            <app-login></app-login>
+          </ng-template> -->
+
     </div>
+
+   
 </nav>

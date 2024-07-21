@@ -15,7 +15,22 @@ import { FooterComponent } from './common/footer/footer.component';
 import { PortfolioModalComponent } from './common/portfolio-modal/portfolio-modal.component';
 import { HeaderComponent } from './common/header/header.component';
 import { HomeComponent } from './pages/home/home.component';
+import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
 
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+
+
+
+import { environment } from './environments/environment';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { AuthService } from './auth.service';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { JwtModule } from '@auth0/angular-jwt';
+import { HttpClientModule, HttpRequest } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ContactFormComponent } from './common/contact-form/contact-form.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,13 +45,39 @@ import { HomeComponent } from './pages/home/home.component';
     FooterComponent,
     PortfolioModalComponent,
     HeaderComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent,
+    LogoutComponent,
+    UserProfileComponent,
+    ContactFormComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ['localhost:3000'], // your backend domain
+        disallowedRoutes: ['localhost:3000/login'] // routes that don't require a token
+      }
+    })
+  /*   MatMenuModule,
+    MatIconModule
+   */
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync(),
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
+

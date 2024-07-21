@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./testimonial.component.scss']
 })
 export class TestimonialComponent {
-
+  contactNumber:string = `+91-96738xxxxx`;
+  contactEmail:string = 'jesmartins10@gmail.com';
 }
