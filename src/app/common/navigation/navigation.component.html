@@ -15,7 +15,7 @@
                 <li class="nav-item"><a class="nav-link" routerLink="/contact"  routerLinkActive="active">Contact</a></li>
                 
 
-                  <li class="nav-item dropdown" *ngIf="user$ | async as user ; else login">
+                  <li class="nav-item dropdown" *ngIf=" user$ | async as user ; else login">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       
                         <ng-container *ngIf="user.photoURL; else initialsTemplate">

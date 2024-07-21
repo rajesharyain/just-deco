@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { PortfolioService } from 'src/app/portfolio.service';
 export interface Portfolio {
   id: number;
   title?: string;
@@ -6,30 +7,36 @@ export interface Portfolio {
   description: string;
   category: string;
 }
-const portFolioJson : Portfolio[] = [
-  { id: 1, category: "Christening" ,title: "Christening Decoration", description: "A fun and vibrant Christening celebration with a floral and photobooth setup.", imgSrc:"assets/img/portfolio/compressed/1.jpg"},
-  { id: 2, category: "Corporate Event",  title: "Corporate Event Decoration", description: "A high-energy corporate dining event with a sleek, modern theme and eye-catching design", imgSrc:"assets/img/portfolio/compressed/2.jpg"},
-  { id: 3, category: "Christening", title: "Christening Celebration", description: "A fun and vibrant Christening celebration with fancy chair setup and amazing entrance.", imgSrc:"assets/img/portfolio/compressed/3.jpg"},
-  { id: 4, category: "Christening", title: "Christening Decoration", description: "", imgSrc:"assets/img/portfolio/compressed/4.jpg"},
-  { id: 5, category: "Christening", title: "Birthday", description: "", imgSrc:"assets/img/portfolio/compressed/5.jpg"},
-  { id: 6, category: "Christening", title: "Christening Celebration", description: "", imgSrc:"assets/img/portfolio/compressed/6.jpg"},
-]
+
 @Component({
   selector: 'app-portfolio',
   templateUrl: './portfolio.component.html',
   styleUrls: ['./portfolio.component.scss']
 })
-export class PortfolioComponent {
+export class PortfolioComponent implements OnInit {
   showModal: boolean = false;
-  portfolioData: Portfolio[]  = portFolioJson;
+  portfolioData: Portfolio[] = [];
   portfolioDetail: any;
-  
+
+  constructor(private portfolioService: PortfolioService) {
+
+  }
+  ngOnInit(): void {
+    this.portfolioService.getPortfolios().subscribe(
+      data => {
+        this.portfolioData = data;
+      },
+      error => {
+        console.error('Error fetching portfolios', error);
+      }
+    );
+  }
 
   show(id: number) {
     //filter vs find
     //this.portfolioDetail = portFolioJson.filter(item => item.id ===id);
-    this.portfolioDetail = portFolioJson.find(item => item.id ===id);
-    console.log(this.portfolioDetail)
+    this.portfolioDetail = this.portfolioData.find(item => item.id === id);
+    //console.log(this.portfolioDetail)
     this.showModal = true; // Show-Hide Modal Check
 
   }

@@ -11,17 +11,21 @@ import { User } from 'src/app/user.model';
 export class NavigationComponent {
   user$: Observable<User | null> | undefined;
   initials: string | undefined;
+  isAuthenticated: boolean = false;
 
-
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) {
+    this.user$ = this.authService.user$;
+  }
 
   ngOnInit() {
-    this.user$ = this.authService.getUser();
+    this.isAuthenticated = this.authService.isAuthenticated();
+  
+ /*    this.user$ = this.authService.getUser();
     this.user$.subscribe(user => {
       if (user && user.displayName!= null) {
         this.initials = this.getInitials(user.displayName);
       }
-    });  
+    });   */
     //console.log(this.user);
   }
 
